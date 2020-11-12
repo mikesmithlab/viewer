@@ -10,6 +10,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QHBoxLayout,
                                  QWidget,
                                  QVBoxLayout, QAction, QPushButton, QFileDialog)
+
+
 import os
 
 
@@ -174,7 +176,7 @@ class MainWindow(QtImageViewer):
 
     def save_vid(self):
         home = os.getenv("HOME")
-        filename, ext = QFileDialog.getSaveFileName(self, "", home + "/Videos/","*.mp4, *.m4v, *.avi")
+        filename, ext = QFileDialog.getSaveFileName(self, "", home + "/Videos/",self.tr("*.mp4;; *.m4v;; *.avi"))
         if filename:
             writevid = WriteVideo(filename, frame=self.readvid.read_frame(n=self.framenum_slider.value))
             start = self.framenum_slider.min
@@ -187,7 +189,7 @@ class MainWindow(QtImageViewer):
 
     def save_img(self):
         home = os.getenv("HOME")
-        filename, ok = QFileDialog.getSaveFileName(self, "", home + "/Pictures/","*.jpg, *.png, *.tiff")
+        filename, ok = QFileDialog.getSaveFileName(self, "", home + "/Pictures/",self.tr("*.jpg;; *.png;; *.tiff"))
         if filename:
             img = self.readvid.read_frame(n=self.framenum_slider.value)
             save(img, filename)
